@@ -1,0 +1,14 @@
+<p><button class="btn btn-primary"
+            routerLink="/consent">Consent</button></p>
+<p>Tutorials</p>
+<ul>
+    <li><a routerLink="/tutorial/tutorial1">Tutorial 1</a></li>
+    <li><a routerLink="/tutorial/tutorial2">Tutorial 2</a></li>
+    <li><a routerLink="/tutorial/tutorial3">Tutorial 3</a></li>
+</ul>
+<p>Levels</p>
+<ul>
+    <li *ngFor="let level of levelsList">
+        <a [routerLink]="['/game', level.name]">{{ level.heading }} </a>
+    </li>
+</ul>

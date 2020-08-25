@@ -1,0 +1,16 @@
+<ng-container *ngIf="this.uuid === ''; else uuidExists">
+    <div class="consent">
+        <p>Here is the consent form.</p>
+        <p><button (click)="acceptConsent()"
+                    routerLink="/dashboard"
+                    class="btn btn-primary">Accept</button></p>
+    </div>
+</ng-container>
+<ng-template #uuidExists>
+    <p>You have already accepted the consent. Would you like to unconsent?</p>
+    <p class="btn btn-primary"
+       (click)="unConsent()">Unconsent</p>
+    <p>Your UUID is: {{ uuid | json }} </p>
+    <p><button class="btn btn-primary"
+                routerLink="/dashboard">Dashboard</button></p>
+</ng-template>
