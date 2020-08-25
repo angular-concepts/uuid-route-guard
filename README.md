@@ -1,27 +1,13 @@
-# UuidRouteGuard
+# UUID Route Guard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.6.
+Consider the following situation:
 
-## Development server
+You have a web application where you'd like to have a "consent form" as the first page. When the user accepts the consent form, you allow them to move further into the dashboard. If the user wants, he can go back and unconsent. However, we only allow the inner routes to be accessible to users who have consented.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+We also want to uniquely identify each user using a UUID. So when the user clicks on the "accept" button unser the consent form, we generate a fresh UUID for them and store it in localStorage. However, we use NGXS to manage state and modify the localStorage in a cleaner manner.
 
-## Code scaffolding
+To protect the inner routes, we use a route guard to check the local storage and see if the uuid field within the store has a 36 character string. To experiment more with angular's router, we add child routes within the dashboard, moreover, these child pages are dynamically checked in a models file that stores all the deatails for possible sub-pages.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+We also redirect any invalid url paths back to the dashboard. Note that if the consent form hasn't been accepted, the dashboard will further redirect to the consent url. Moreover, the dashboard also has a button to go back to the consent form and "unconsent," the consent form after the consent has been accepted looks different: it shows the UUID and a button to unconsent.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+An addition to this would be to keep the sub-page details on firebase, and have the dynamic routing get the details using a request.
