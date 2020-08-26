@@ -14,7 +14,6 @@ import { UUID } from '../models/uuid.model'
 export class ConsentComponent implements OnInit {
 
   uuid: UUID;
-  source$: Observable<Event>;
 
   constructor(private router: Router, private store: Store) {
   }
